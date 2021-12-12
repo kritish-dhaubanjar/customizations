@@ -15,3 +15,6 @@ else
 fi
 unset color_prompt force_color_prompt
 ```
+
+### tmux
+https://user-images.githubusercontent.com/25634165/145715759-881a05be-eaed-41cb-9950-4c71884c6090.mp4
