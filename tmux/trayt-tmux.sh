@@ -6,7 +6,7 @@ SESSION_EXISTS=$(tmux list-sessions | grep $SESSION)
 PROJECT_ROOT="$HOME/lftechnology/trayt/"
 PROJECTS=($(ls -d "$PROJECT_ROOT"*))
 
-if [ "$SESSION_EXISTS" = "" ]; then
+if [ "$SESSION_EXISTS" == "" ]; then
   for i in ${!PROJECTS[@]}
   do
     PROJECT_PATH=${PROJECTS[$i]}
