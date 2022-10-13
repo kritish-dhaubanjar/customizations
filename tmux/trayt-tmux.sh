@@ -3,44 +3,24 @@
 SESSION='trayt'
 SESSION_EXISTS=$(tmux list-sessions | grep $SESSION)
 
-API='api'
-REDIS='redis'
-CPAN_PORTAL='cpan-portal'
-DATA_EXPORT='data-export'
-MISCUTILITIES='miscutilities'
-SCHOOL_PORTAL='school-portal'
-CLINICIAN_PORTAL='clinician-portal'
+PROJECT_ROOT="$HOME/lftechnology/trayt/"
+PROJECTS=($(ls -d "$PROJECT_ROOT"*))
 
-API_PATH="/home/jin/lftechnology/trayt/api"
-CPAN_PORTAL_PATH='/home/jin/lftechnology/trayt/cpan-portal'
-DATA_EXPORT_PATH='/home/jin/lftechnology/trayt/data-export'
-MISCUTILITIES_PATH='/home/jin/lftechnology/trayt/miscutilities'
-SCHOOL_PORTAL_PATH='/home/jin/lftechnology/trayt/school-portal'
-CLINICIAN_PORTAL_PATH='/home/jin/lftechnology/trayt/clinician-portal'
+if [ "$SESSION_EXISTS" = "" ]; then
+  for i in ${!PROJECTS[@]}
+  do
+    PROJECT_PATH=${PROJECTS[$i]}
+    PROJECT_NAME=$(basename $PROJECT_PATH)
 
-if [ "$SESSION_EXISTS" = "" ]
-then
-  tmux new-session -s $SESSION -c $API_PATH -d
+    if [ $i = 0 ]; then
+      tmux new-session -s $SESSION -c $PROJECT_PATH -d
+      tmux rename-window $PROJECT_NAME
+    else
+      tmux new-window -n $PROJECT_NAME -c $PROJECT_PATH -d
+    fi
 
-  tmux rename-window $API
-  tmux split-window -h -t $API -c $API_PATH -d
-
-  tmux new-window -n $CPAN_PORTAL -c $CPAN_PORTAL_PATH -d
-  tmux split-window -h -t $CPAN_PORTAL -c $CPAN_PORTAL_PATH -d
-
-  tmux new-window -n $CLINICIAN_PORTAL -c $CLINICIAN_PORTAL_PATH -d
-  tmux split-window -h -t $CLINICIAN_PORTAL -c $CLINICIAN_PORTAL_PATH -d
-
-  tmux new-window -n $SCHOOL_PORTAL -c $SCHOOL_PORTAL_PATH -d
-  tmux split-window -h -t $SCHOOL_PORTAL -c $SCHOOL_PORTAL_PATH -d
-
-  tmux new-window -n $DATA_EXPORT -c $DATA_EXPORT_PATH -d
-  tmux split-window -h -t $DATA_EXPORT -c $DATA_EXPORT_PATH -d
-
-  tmux new-window -n $MISCUTILITIES -c $MISCUTILITIES_PATH -d
-  tmux split-window -h -t $MISCUTILITIES -c $MISCUTILITIES_PATH -d
-  
-  tmux new-window -n $REDIS -d
+    tmux split-window -h -t $PROJECT_NAME -c $PROJECT_PATH -d
+  done
 fi
 
 tmux attach-session -t $SESSION
