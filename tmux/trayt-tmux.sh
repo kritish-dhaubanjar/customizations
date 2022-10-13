@@ -12,7 +12,7 @@ if [ "$SESSION_EXISTS" = "" ]; then
     PROJECT_PATH=${PROJECTS[$i]}
     PROJECT_NAME=$(basename $PROJECT_PATH)
 
-    if [ $i = 0 ]; then
+    if [ $i -eq 0 ]; then
       tmux new-session -s $SESSION -c $PROJECT_PATH -d
       tmux rename-window $PROJECT_NAME
     else
