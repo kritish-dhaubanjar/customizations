@@ -15,7 +15,7 @@ if [ "$SESSION_EXISTS" == "" ]; then
     if [ $i -eq 0 ]; then
       tmux new-session -s $SESSION -c $PROJECT_PATH -d
       tmux rename-window $PROJECT_NAME
-    else
+    elif [[ -d $PROJECT_PATH ]]; then
       tmux new-window -n $PROJECT_NAME -c $PROJECT_PATH -d
     fi
 
