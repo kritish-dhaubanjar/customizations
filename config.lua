@@ -123,3 +123,11 @@ lvim.autocommands = {
     },
   },
 }
+
+-- telescope
+lvim.builtin.telescope = {
+  active = true,
+  defaults = {
+    layout_strategy = "horizontal",
+  }
+}
