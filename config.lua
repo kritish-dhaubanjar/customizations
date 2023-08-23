@@ -129,5 +129,8 @@ lvim.builtin.telescope = {
   active = true,
   defaults = {
     layout_strategy = "horizontal",
+    layout_config = {
+      width = 0.65,
+    }
   }
 }
