@@ -22,8 +22,9 @@ vim.opt.fillchars = {
 lvim.keys.normal_mode["<M-l>"] = ":BufferLineMoveNext<CR>"
 lvim.keys.normal_mode["<M-h>"] = ":BufferLineMovePrev<CR>"
 
-lvim.colorscheme = "tokyonight-night"
+lvim.colorscheme = "catppuccin" -- tokyonight-night
 lvim.transparent_window = false
+
 lvim.builtin.terminal.open_mapping = "<c-t>"
 
 -- use treesitter folding
@@ -93,6 +94,8 @@ lvim.plugins = {
       require("nvim-ts-autotag").setup()
     end,
   },
+  -- catppuccin
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
 }
 
 -- mini.map
